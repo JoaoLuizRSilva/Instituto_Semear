@@ -1,0 +1,83 @@
+{%extends 'index.html'%}
+{%block title%}Lista de Eventos{%endblock%}
+{%block content%}
+    <table id="event-table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Local</th>
+                <th>Data</th>
+                <th>Horário</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+
+    <script>
+        // Espera até que o DOM esteja completamente carregado antes de executar o código
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cria uma nova solicitação XMLHttpRequest
+            var xhr = new XMLHttpRequest();
+            // Abre uma solicitação GET para o endpoint '/api/events/'
+            xhr.open('GET', '/api/events/', true);
+            // Define uma função a ser chamada sempre que o estado da solicitação mudar
+            xhr.onreadystatechange = function() {
+                // Verifica se a solicitação foi concluída (readyState 4)
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    // Verifica se o status da resposta é bem-sucedido (200)
+                    if (xhr.status === 200) {
+                        // Converte a resposta JSON em um objeto JavaScript
+                        var events = JSON.parse(xhr.responseText);
+                        // Obtém a referência para a tabela de eventos no HTML
+                        var eventTable = document.getElementById('event-table').getElementsByTagName('tbody')[0];
+                        // Limpa o conteúdo atual da tabela
+                        eventTable.innerHTML = '';
+                        // Itera sobre cada evento retornado pela API
+                        events.forEach(function(event) {
+                            // Insere uma nova linha na tabela
+                            var row = eventTable.insertRow();
+                            // Insere células para cada campo do evento
+                            var titleCell = row.insertCell(0);
+                            var localCell = row.insertCell(1);
+                            var dateCell = row.insertCell(2);
+                            var timeCell = row.insertCell(3);
+                            var buttonCell = row.insertCell(4);
+    
+                            // Preenche as células com os dados do evento
+                            titleCell.innerHTML = `<a href='/api/events/view/${event.id}'>${event.title}</a>`;
+                            localCell.textContent = event.local;
+    
+                            // Formata a data do evento
+                            var eventDate = new Date(event.schedule);
+                            var formattedDate = eventDate.getDate() + ' ' + getMonthName(eventDate.getMonth()) + ' ' + eventDate.getFullYear();
+                            dateCell.textContent = formattedDate;
+    
+                            // Formata o horário do evento
+                            var formattedTime = eventDate.toLocaleTimeString('en-US', { hour12: false });
+                            timeCell.textContent = formattedTime;
+    
+                            // Adiciona botões de atualização e exclusão para cada evento
+                            buttonCell.innerHTML = `
+                                <a href='/api/events/update/${event.id}' class='button_update'>Atualizar</a>
+                                <a href='/api/events/delete/${event.id}' class='button_delete'>Excluir</a>`;
+                        });
+                    } else {
+                        // Exibe um erro caso a solicitação falhe
+                        console.error('Erro ao obter eventos:', xhr.status);
+                    }
+                }
+            };
+            // Envia a solicitação XMLHttpRequest
+            xhr.send();
+        });
+    
+        // Função para obter o nome do mês com base no índice do mês
+        function getMonthName(monthIndex) {
+            var months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+            return months[monthIndex];
+        }
+    </script>    
+{%endblock%}

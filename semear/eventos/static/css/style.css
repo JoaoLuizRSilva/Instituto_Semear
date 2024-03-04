@@ -1,0 +1,132 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Header */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+header a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 28px;
+    transition: all 0.3s ease;
+}
+
+header a:hover {
+    color: #ffa500;
+}
+
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+a {
+    color: black;
+}
+
+.button_update, .button_delete {
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px;
+    display: block;
+    text-align: center;
+}
+
+.button_update {
+    background-color: green;
+}
+
+.button_delete {
+    background-color: red;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 25px 40px;
+}
+
+h1, p, form {
+    margin-top: 10px;
+}
+
+h2 {
+    margin-left: 10px;
+}
+
+/* Event */
+.event {
+    display: flex;
+    justify-content: space-between;
+}
+
+.event-info {
+    margin: 10px 10px 20px;
+}
+
+.event-form {
+    margin: 10px 10px 20px 0;
+    background-color: #333;
+    padding: 15px;
+    border-radius: 10px;
+    color: white;
+}
+
+form input, form button, form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    border: none;
+    margin-top: 10px;
+}
+
+form button {
+    background-color: #ffa500;
+    color: white;
+    font-weight: bold;
+}
+
+/* Basic list style */
+ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+/* List item style */
+li {
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: #333;
+}
+
+.container-form {
+    width: 80%;
+    margin: 10px auto;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    border-radius: 10px;
+}

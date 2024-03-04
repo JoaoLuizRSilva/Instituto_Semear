@@ -1,0 +1,11 @@
+{% extends 'index.html' %}
+{% block content %}
+    <div class="container-form">
+        <h2>Criar Evento</h2>
+        <form method="post" class="mt-4">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+    </div>
+{% endblock %}
